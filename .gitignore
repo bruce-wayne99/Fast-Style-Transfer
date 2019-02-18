@@ -1,2 +1,4 @@
-fast_neural_style/*.pyc
 venv/
+*.pyc
+code/venv
+Style/applications/*/migrations/*
