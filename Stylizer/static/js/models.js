@@ -66,19 +66,24 @@ var models = {
 	runStyleTransfer: function() {
 		var canvas = document.querySelector("#canvasElement");
 		var img = canvas.toDataURL();
-		// var data = models.base64ToArrayBuffer(img.split('data:image/png;base64,')[1]);
-		// console.log(new Uint8Array(data)[0]);
-		// console.log(img.split('data:image/png;base64,')[1]);
 		utils.jsonRequest('POST', '/ajax/run_style_transfer', {
 			'base64str': img.split('data:image/png;base64,')[1]
 		},
 		successCallback = function (response) {
 			$.notify('Style images have been loaded','success');
-			// console.log(response.iname);
-			// models.displayStylizedImage(response.iname);
+			console.log(response.iname);
+			models.displayStylizedImage(response.iname);
 		},
 		errorCallback = function (response) {
 			$.notify('Failed to gather style images','error');			
 		});
+	},
+	displayStylizedImage(iname) {
+		table = $('#outTable');
+		str = '<tr style="align:center">';
+		str += '<td><a class="list-group-item list-group-item-action">';
+		str += '<img src="/static/' + iname + '" alt="Image"/>';
+		str += '</a></td></tr>';
+		table.html(str);
 	}
 }
