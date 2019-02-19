@@ -1,4 +1,25 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block content %}
-<p> Welcome to the home page </p>
+
+<div class="jumbotron">
+	<table class="table" id="videoTable">
+		<tr>
+			<td style="width: 50%">
+				<video autoplay="true" id="videoElement" width="888px" height="600px">
+				</video>
+			</td>
+			<td style="width: 50%">
+				<canvas id="canvasElement" width="800px" height="600px"></canvas>
+			</td>
+		</tr>
+	</table>
+	<table class="table" id="styleTable">
+	</table>
+</div>
+
+<!-- Script Part -->
+<script src="{% static 'js/models.js' %}"></script>
+<script type="text/javascript">models.init(); </script>
+
 {% endblock content %}

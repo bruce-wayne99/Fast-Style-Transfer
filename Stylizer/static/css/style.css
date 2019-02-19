@@ -1,53 +1,19 @@
-#optionsTable {
-	width: 80%;
-}
-
-#postersTable {
+#styleTable {
 	width: 100%;
 	table-layout: fixed;
 }
 
-#postersTable td {
+#styleTable td {
 	padding: 2px;
 }
 
-#postersTable a {
+#styleTable a {
 	padding: 3px;
 }
 
-#postersTable img {
-	width: 100px;
-	height: 130px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#topNeighboursTable {
+#styleTable img {
 	width: 100%;
-	table-layout: fixed;
-}
-
-#topNeighboursTable td {
-	padding: 2px;
-}
-
-#topNeighboursTable a {
-	padding: 3px;
-}
-
-#topNeighboursTable img {
-	width: 100px;
-	height: 130px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-#eoptionsTable {
-	width: 80%;
-}
-
-.hidden {
-	display:none;
 }

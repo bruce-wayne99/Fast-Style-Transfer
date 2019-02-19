@@ -118,16 +118,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-#DATASET = os.path.join(os.environ['dataset'], "")
+STYLE_IMAGES = os.path.join(BASE_DIR, "../fast_neural_style/images/style-images/")
+CONTENT_IMAGES = os.path.join(BASE_DIR, "../fast_neural_style/images/content-images/")
+OUT_IMAGES = os.path.join(BASE_DIR, "../fast_neural_style/images/output-images/")
+MODEL_PATH = os.path.join(BASE_DIR, "../fast_neural_style/saved_models/")
+SRC_PATH = os.path.join(BASE_DIR, "../fast_neural_style/")
 
 STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, "static"),
-#    DATASET
-#)
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
+    STYLE_IMAGES,
+    OUT_IMAGES,
+    CONTENT_IMAGES
 )

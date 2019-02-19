@@ -11,5 +11,6 @@ class StyleImage(models.Model):
 			'id': cls.id,
 			'name': cls.name,
 			'desc': cls.desc,
-			'mpath': cls.mpath
+			'mpath': cls.mpath,
+			'ipath': cls.ipath
 		}
