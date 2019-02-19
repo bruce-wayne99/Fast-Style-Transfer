@@ -44,7 +44,7 @@ var models = {
 		},
 		successCallback = function (response) {
 			$.notify('Style images have been loaded','success');
-			console.log(response.images);
+			// console.log(response.images);
 			models.displayStyleImages(response.images);
 		},
 		errorCallback = function (response) {
@@ -62,16 +62,25 @@ var models = {
 		}
 		str += '</tr>';
 		table.html(str);
+		models.addOnClickHandlers($('#styleTable').find('td'), images);
 	},
-	runStyleTransfer: function() {
+	addOnClickHandlers: function (imgs, images) {
+		for(var i = 0; i < imgs.length; i++) {
+			$(imgs[i]).data('mpath', images[i].mpath);
+			$(imgs[i]).click(function () {
+				models.runStyleTransfer($(this).data('mpath'));
+			});
+		}
+	},
+	runStyleTransfer: function(mpath) {
 		var canvas = document.querySelector("#canvasElement");
 		var img = canvas.toDataURL();
 		utils.jsonRequest('POST', '/ajax/run_style_transfer', {
-			'base64str': img.split('data:image/png;base64,')[1]
+			'base64str': img.split('data:image/png;base64,')[1],
+			'mpath': mpath
 		},
 		successCallback = function (response) {
 			$.notify('Style images have been loaded','success');
-			console.log(response.iname);
 			models.displayStylizedImage(response.iname);
 		},
 		errorCallback = function (response) {
@@ -80,6 +89,7 @@ var models = {
 	},
 	displayStylizedImage(iname) {
 		table = $('#outTable');
+		table.html("");
 		str = '<tr style="align:center">';
 		str += '<td><a class="list-group-item list-group-item-action">';
 		str += '<img src="/static/' + iname + '" alt="Image"/>';

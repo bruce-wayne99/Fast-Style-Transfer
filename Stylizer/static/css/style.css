@@ -17,3 +17,23 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+#outTable {
+	width: 100%;
+	table-layout: fixed;
+}
+
+#outTable td {
+	padding: 2px;
+}
+
+#outTable a {
+	padding: 3px;
+}
+
+#outTable img {
+	width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}

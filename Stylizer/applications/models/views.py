@@ -23,6 +23,7 @@ def ajax_get_style_images(request):
 def ajax_run_style_transfer(request):
 	st_time = time.time()
 	img_data = json.loads(request.body)['base64str']
+	model_name = json.loads(request.body)['mpath']
 	fh = open(CONTENT_IMAGES + 'content.png', 'wb')
 	fh.write(img_data.decode('base64'))
 	fh.close()
@@ -30,19 +31,20 @@ def ajax_run_style_transfer(request):
 	img = cv2.resize(img, (1080,1080))
 	cv2.imwrite(CONTENT_IMAGES + 'content.jpg', img)
 	content_img = CONTENT_IMAGES+'content.jpg'
-	style_img = STYLE_IMAGES + 'candy.jpg'
-	output_img = OUT_IMAGES +'stylized.jpg'
-	model_path = MODEL_PATH + 'candy.pth'
-	command_run_style_transfer(content_img=content_img, style_img=style_img, output_img=output_img, model_path=model_path)
+	output_name = 'stylized' + ''.join(str(time.time()).split('.')) + '.jpg'
+	# output_name = 'stylized' + '.jpg'
+	output_img = OUT_IMAGES + output_name
+	model_path = MODEL_PATH + model_name
+	command_run_style_transfer(content_img=content_img, output_img=output_img, model_path=model_path)
 	img = cv2.imread(output_img)
 	img = cv2.resize(img, (800, 600))
 	cv2.imwrite(output_img, img)
 	print(time.time()-st_time, 'Total time for style transfer')
 	return HttpResponse(json.dumps({
-			'iname': 'stylized.jpg'
+			'iname': output_name
 		}), content_type="application/json", status=200)
 
-def command_run_style_transfer(content_img, style_img, output_img, model_path):
+def command_run_style_transfer(content_img, output_img, model_path):
 	command = ""
 	command += " python " + SRC_PATH + "neural_style.py eval"
 	command += " --content-image " + content_img
