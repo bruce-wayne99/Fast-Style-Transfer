@@ -3,21 +3,61 @@
 {% block content %}
 
 <div class="jumbotron">
+
 	<table class="table" id="videoTable">
 		<tr>
-			<td style="width: 50%">
-				<video autoplay="true" id="videoElement" width="888px" height="600px">
-				</video>
+			<td style="text-align: center;">
+				<video autoplay="true" id="videoElement" width="1000px" height="750px"></video>
+				<canvas id="canvasElement2" width="1000px" height="750px" class="hidden"></canvas>
 			</td>
-			<td style="width: 50%">
-				<canvas id="canvasElement" width="800px" height="600px"></canvas>
+		</tr>
+		<tr>
+			<td style="text-align: center; width: 100%">
+				<button type="button" class="btn btn-primary" id="captureButton">Capture!</button>
+			</td>
+		</tr>
+		<tr id="captureTable1" class="hidden">
+			<td style="text-align: center; width: 100%">
+				<button type="button" class="btn btn-primary" id="captureAgain">Take Picture Again!</button>
+				<button type="button" class="btn btn-primary" id="nextButton1">Next</button>
 			</td>
 		</tr>
 	</table>
-	<table class="table" id="styleTable">
+
+	<table class="table hidden" id="styleSelectionTable">
+	<tr><td style="width: 50%">
+		<table id="styleTable2">
+			<tr>
+				<td>
+					<canvas id="canvasElement" width="800px" height="600px"></canvas>
+				</td>
+			</tr>
+		</table>
+	</td><td>
+		<table id="styleTable">
+		</table>
+	</td></tr>
 	</table>
-	<table class="table" id="outTable">
+	<table class="table hidden" id="styleSelectionTable2">
+		<tr>
+			<td style="text-align: center;">
+				<button type="button" class="btn btn-primary" id="backButton1">Back</button>
+				<button type="button" class="btn btn-primary" id="applyStyleTransfer">Apply style transfer!</button>
+			</td>
+		</tr>
 	</table>
+
+	<table class="table hidden" id="outTable">
+	</table>
+	<table class="table hidden" id="outTable2">
+		<tr>
+			<td style="text-align: center;">
+				<!-- <button type="button" class="btn btn-primary" id="backButton2">Back</button> -->
+				<button type="button" class="btn btn-primary" id="captureNewImage">Try on another image!</button>
+			</td>
+		</tr>
+	</table>
+
 </div>
 
 <!-- Script Part -->
