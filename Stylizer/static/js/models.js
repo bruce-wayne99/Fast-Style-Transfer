@@ -186,11 +186,11 @@ var models = {
 		},
 		successCallback = function(response) {
 			$('Thank you for your time', 'success');
-    		setTimeout(models.resetPage, 2000);
+    		setTimeout(models.resetPage, 1000);
 		},
 		errorCallback = function (response) {
 			$('Failed to send email', 'error');
-			setTimeout(models.resetPage, 2000);
+			setTimeout(models.resetPage, 1000);
 		});
 	},
 	resetPage: function() {

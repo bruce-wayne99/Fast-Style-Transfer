@@ -29,6 +29,7 @@ def ajax_run_style_transfer(request):
 	fh.close()
 	img = cv2.imread(CONTENT_IMAGES + 'content.png')
 	img = cv2.resize(img, (1080,1080))
+	label = cv2.imread(CONTENT_IMAGES + 'label.jpg')
 	cv2.imwrite(CONTENT_IMAGES + 'content.jpg', img)
 	content_img = CONTENT_IMAGES+'content.jpg'
 	output_names = []
@@ -41,6 +42,7 @@ def ajax_run_style_transfer(request):
 		command_run_style_transfer(content_img=content_img, output_img=output_img, model_path=model_path)
 		img = cv2.imread(output_img)
 		img = cv2.resize(img, (800, 600))
+		img[600-label.shape[0]:, 800-label.shape[1]:, :] = label
 		cv2.imwrite(output_img, img)
 		output_names.append(output_name)
 	print(time.time()-st_time, 'Total time for style transfer')
