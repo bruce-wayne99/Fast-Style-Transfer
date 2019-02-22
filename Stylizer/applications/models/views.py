@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from applications.models.models import StyleImage
+from applications.models.models import StyleImage, VisitorCnt
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from style.settings import CONTENT_IMAGES, STYLE_IMAGES, OUT_IMAGES, MODEL_PATH, SRC_PATH
@@ -33,7 +33,8 @@ def ajax_run_style_transfer(request):
 	content_img = CONTENT_IMAGES+'content.jpg'
 	output_names = []
 	for model_name in model_names:
-		output_name = 'stylized' + ''.join(str(time.time()).split('.')) + '.jpg'
+		# output_name = model_name.split('.')[0] + '_' + ''.join(str(time.time()).split('.')) + '.jpg'
+		output_name = model_name.split('.')[0] + '_' + str(len(VisitorCnt.objects.all())) + '.jpg'
 		# output_name = 'stylized' + '.jpg'
 		output_img = OUT_IMAGES + output_name
 		model_path = MODEL_PATH + model_name
@@ -56,3 +57,21 @@ def command_run_style_transfer(content_img, output_img, model_path):
 	command += " --cuda 0"
 	os.system(command)
 	return
+
+def ajax_send_email(request):
+	email = request.GET['email']
+	visitor = VisitorCnt(email=email)
+	visitor.save()
+	img_names = request.GET.getlist('img_names[]')
+	for img_name in img_names:
+		command = 'mv '
+		command += OUT_IMAGES + img_name + ' '
+		command += OUT_IMAGES + email + '_' + str(len(VisitorCnt.objects.all())) + '_' + img_name.split('_')[0] + '.jpg'
+		os.system(command)
+	return HttpResponse(json.dumps({
+		}), content_type="application/json", status=200)
+
+def ajax_visitor_cnt(request):
+	return HttpResponse(json.dumps({
+			'cnt': len(VisitorCnt.objects.all())
+		}), content_type="application/json", status=200)

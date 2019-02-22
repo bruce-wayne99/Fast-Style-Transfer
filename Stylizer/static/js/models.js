@@ -65,8 +65,16 @@ var models = {
     		$('#outTable2').addClass('hidden');
     		$('#videoTable').removeClass('hidden');
     	});
-
+    	$('#emailSubmitBtn').click(function() {
+    		if(models.checkValidEmail($('#emailAdrr').val())) {
+    			models.sendEmail($('#emailAdrr').val());
+    		}
+    		else {
+    			$.notify('Please enter valid email address');
+    		}
+    	});
     	models.getStyleImages();
+    	models.populateVisitorCnt();
 	},
 	getSelectedImages: function () {
 		select_ele = $('.selected');
@@ -153,7 +161,7 @@ var models = {
 			$.notify('Failed to gather style images','error');			
 		});
 	},
-	displayStylizedImage(inames) {
+	displayStylizedImage: function(inames) {
 		table = $('#outTable');
 		table.html("");
 		str = '<tr style="align:center">';
@@ -164,5 +172,48 @@ var models = {
 		}
 		str += '</tr>';
 		table.html(str);
+	},
+	sendEmail: function(email) {
+		var imgs = $('#outTable').find('img');
+		var img_names = [];
+		for(var i = 0; i < imgs.length; i++) {
+			img_names.push(imgs[i].src.split('/')[imgs[i].src.split('/').length - 1]);
+		}
+		console.log(img_names);
+		utils.jsonRequest('GET', '/ajax/send_email', {
+			'email': email,
+			'img_names': img_names
+		},
+		successCallback = function(response) {
+			$('Thank you for your time', 'success');
+    		setTimeout(models.resetPage, 2000);
+		},
+		errorCallback = function (response) {
+			$('Failed to send email', 'error');
+			setTimeout(models.resetPage, 2000);
+		});
+	},
+	resetPage: function() {
+		$('#outTable').addClass('hidden');
+		$('#outTable2').addClass('hidden');
+		$('#videoTable').removeClass('hidden');
+		$('#captureAgain').click();
+		models.populateVisitorCnt();
+	},
+	checkValidEmail: function(email) {
+		if(email != '') {
+			return true;
+		}
+		return false;
+	},
+	populateVisitorCnt: function() {
+		utils.jsonRequest('GET', '/ajax/get_visitor_cnt', {
+		},
+		successCallback = function(response) {
+			$('#visitorCnt').html(response.cnt);
+		},
+		errorCallback = function(response) {
+			$('#visitorCnt').html(0);
+		});
 	}
 }

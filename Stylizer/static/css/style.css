@@ -45,3 +45,21 @@
 .selected {
 	border: 10px solid red;
 }
+
+body {
+	background-color: #EAEBEA;
+}
+
+#visitorCnt {
+	border-radius: 5px;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	display: table-cell;
+	font-weight: bold;
+	background-color: #284A6D;
+}
+
+.my-button {
+	font-weight: bold;
+}

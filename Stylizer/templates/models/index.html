@@ -2,24 +2,31 @@
 {% load staticfiles %}
 {% block content %}
 
-<div class="jumbotron">
-
+<div>
+	<ul class="list-group" style="width: 12%; font-size: 17px; background-color: #EAEBEA;">
+  		<li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #EAEBEA; border-width: 0px;">
+    		<span style="font-weight: bold;">VISITOR COUNT</span>
+    		<div style="display: table; height: 40px; width: 40px;">
+    			<div id="visitorCnt">14</div>
+    		</span>
+  		</li>
+  	</ul>
 	<table class="table" id="videoTable">
 		<tr>
-			<td style="text-align: center;">
-				<video autoplay="true" id="videoElement" width="1000px" height="750px"></video>
-				<canvas id="canvasElement2" width="1000px" height="750px" class="hidden"></canvas>
-			</td>
-		</tr>
-		<tr>
 			<td style="text-align: center; width: 100%">
-				<button type="button" class="btn btn-primary" id="captureButton">Capture!</button>
+				<button type="button" class="btn btn-primary my-button" id="captureButton">Capture!</button>
 			</td>
 		</tr>
 		<tr id="captureTable1" class="hidden">
 			<td style="text-align: center; width: 100%">
-				<button type="button" class="btn btn-primary" id="captureAgain">Take Picture Again!</button>
-				<button type="button" class="btn btn-primary" id="nextButton1">Next</button>
+				<button type="button" class="btn btn-primary my-button" id="captureAgain">Take Picture Again!</button>
+				<button type="button" class="btn btn-primary my-button" id="nextButton1">Next</button>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				<video autoplay="true" id="videoElement" width="1000px" height="750px"></video>
+				<canvas id="canvasElement2" width="1000px" height="750px" class="hidden"></canvas>
 			</td>
 		</tr>
 	</table>
@@ -41,8 +48,8 @@
 	<table class="table hidden" id="styleSelectionTable2">
 		<tr>
 			<td style="text-align: center;">
-				<button type="button" class="btn btn-primary" id="backButton1">Back</button>
-				<button type="button" class="btn btn-primary" id="applyStyleTransfer">Apply style transfer!</button>
+				<button type="button" class="btn btn-primary my-button" id="backButton1">Back</button>
+				<button type="button" class="btn btn-primary my-button" id="applyStyleTransfer">Apply style transfer!</button>
 			</td>
 		</tr>
 	</table>
@@ -51,9 +58,21 @@
 	</table>
 	<table class="table hidden" id="outTable2">
 		<tr>
-			<td style="text-align: center;">
-				<!-- <button type="button" class="btn btn-primary" id="backButton2">Back</button> -->
+			<!-- <td style="text-align: center;">
+				<button type="button" class="btn btn-primary" id="backButton2">Back</button>
 				<button type="button" class="btn btn-primary" id="captureNewImage">Try on another image!</button>
+			</td> -->
+			<td style="text-align: center;">
+				<form>
+				<fieldset>
+					<legend>Email yourself!</legend>
+					<div class="form-group" style="width: 30%; display: inline-block;">
+	      				<input type="email" class="form-control" id="emailAdrr" aria-describedby="emailHelp" placeholder="Enter your email">
+	      				<small class="form-text text-muted">We'll never share your email with anyone else.</small>
+    				</div><br/>
+    				<button type="button" class="btn btn-primary my-button" id="emailSubmitBtn">Submit</button>
+    			</fieldset>
+    			</form>
 			</td>
 		</tr>
 	</table>

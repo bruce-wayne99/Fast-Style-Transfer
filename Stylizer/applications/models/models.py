@@ -14,3 +14,12 @@ class StyleImage(models.Model):
 			'mpath': cls.mpath,
 			'ipath': cls.ipath
 		}
+
+class VisitorCnt(models.Model):
+	email = models.CharField(max_length=1000, null=True)
+
+	def serialize(cls):
+		return {
+			'id': cls.id,
+			'email': cls.email
+		}
