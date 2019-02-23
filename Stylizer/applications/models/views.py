@@ -29,7 +29,7 @@ def ajax_run_style_transfer(request):
 	fh.close()
 	img = cv2.imread(CONTENT_IMAGES + 'content.png')
 	img = cv2.resize(img, (1080,1080))
-	label = cv2.imread(CONTENT_IMAGES + 'label.jpg')
+	label = cv2.imread(CONTENT_IMAGES + 'label1.png')
 	cv2.imwrite(CONTENT_IMAGES + 'content.jpg', img)
 	content_img = CONTENT_IMAGES+'content.jpg'
 	output_names = []
