@@ -117,11 +117,21 @@ var models = {
 	displayStyleImages: function(images) {
 		table = $('#styleTable');
 		str = '<tr style="align:center">';
+		str += '<th>Click on the style images to select them</th>';
+		str += '<th>You can select a maximum of 3 styles</th>';
+		str += '</tr>';
+		str += '<tr style="align:center">';
+		var cnt = 0;
 		for(var i = 0; i < images.length; i++) {
 			str += '<td><a class="list-group-item list-group-item-action">';
 			str += '<img src="/static/' + images[i].ipath + '" alt="Image"/>';
 			// str += models.getImageInfo(movies[i]);
 			str += '</a></td>';
+			if(cnt % 2 == 1) {
+				str += '</tr>';
+				str += '<tr style="align:center">';
+			}
+			cnt += 1;
 		}
 		str += '</tr>';
 		table.html(str);

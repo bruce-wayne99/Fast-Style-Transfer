@@ -63,3 +63,7 @@ body {
 .my-button {
 	font-weight: bold;
 }
+
+th {
+	font-size: 21px;
+}
