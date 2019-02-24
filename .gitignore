@@ -4,3 +4,4 @@ code/venv
 Style/applications/*/migrations/*
 fast_neural_style/images/output-images/*
 fast_neural_style/images/content-images/*
+dataset/
